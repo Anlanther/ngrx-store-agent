@@ -1,11 +1,12 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
+import { WidgetInput } from './models/widget-input-model';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.html',
   standalone: false,
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App {
-  protected readonly title = signal('ngrx-store-agent');
+  widgetInput: WidgetInput = { workspaceId: 'super-search', userId: 'user-1' };
 }

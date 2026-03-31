@@ -1,0 +1,11 @@
+<div class="widget-frame">
+  <div class="widget-frame-header">
+    <app-sessions-button [userId]="widgetInput().userId"></app-sessions-button>
+  </div>
+  <div class="body">
+    <app-body [conversations]="assistantStore.conversations()"></app-body>
+  </div>
+  <div class="toolbars">
+    <app-toolbar-wrapper [toolbar]="assistantStore.mode()"></app-toolbar-wrapper>
+  </div>
+</div>
