@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Session } from '../models/session-model';
+import { Session } from '../models';
 
 @Injectable({
   providedIn: 'root',

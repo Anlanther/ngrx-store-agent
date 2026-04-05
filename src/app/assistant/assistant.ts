@@ -1,6 +1,6 @@
 import { Component, effect, inject, input } from '@angular/core';
-import { Mode } from '../constants/mode-enum';
-import { WidgetInput } from '../models/widget-input-model';
+import { Mode, WORKSPACE_MODE_MAP } from '../constants';
+import { WidgetInput } from '../models';
 import { AssistantStore } from './state/assistant-store';
 
 @Component({
@@ -14,15 +14,10 @@ export class Assistant {
 
   assistantStore = inject(AssistantStore);
 
-  private workspaceModeMap: Map<string, Mode> = new Map([
-    ['super-search', Mode.SuperSearch],
-    ['core', Mode.Core],
-  ]);
-
   constructor() {
     effect(() => {
       this.assistantStore.updateMode(
-        this.workspaceModeMap.get(this.widgetInput().workspaceId) || Mode.Core,
+        WORKSPACE_MODE_MAP.get(this.widgetInput().workspaceId)?.mode || Mode.Core,
       );
     });
   }

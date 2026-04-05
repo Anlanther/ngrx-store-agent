@@ -1,18 +1,17 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AgentResponseModel, MessagePayload } from '../models';
-import { BaseAgentService } from '../models/base-agent-service-model';
+import { AgentResponseModel, BaseAgentService, MessagePayload } from '../models';
 import { StreamingDataService } from './streaming-data-service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ResearchDataService implements BaseAgentService {
+export class CoreDataService implements BaseAgentService {
   streamingDataService = inject(StreamingDataService);
 
   url = 'http://127.0.0.1:8000/';
 
   postResponse(payload: MessagePayload): Observable<AgentResponseModel> {
-    return this.streamingDataService.getStream(this.url, 'research', {});
+    return this.streamingDataService.getStream(this.url, 'core', {});
   }
 }

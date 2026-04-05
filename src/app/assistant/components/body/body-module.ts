@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { Body } from './body';
+import { BodyWrapper } from './body-wrapper/body-wrapper';
+import { Messages } from './messages/messages';
 
 @NgModule({
-  declarations: [Body],
+  declarations: [BodyWrapper, Messages],
   imports: [CommonModule],
-  exports: [Body],
+  exports: [BodyWrapper],
 })
 export class BodyModule {}

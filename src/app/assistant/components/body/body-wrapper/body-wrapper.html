@@ -1,0 +1,9 @@
+<div class="messages-container">
+  @if (conversations().length === 0) {
+    <div class="empty-state">No messages yet. Start a conversation.</div>
+  } @else {
+    @for (conversation of conversations(); track trackByConversationId($index, conversation)) {
+      {{ conversation | json }}
+    }
+  }
+</div>

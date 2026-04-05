@@ -1,4 +1,5 @@
-import { Component, input } from '@angular/core';
+import { Component, effect, inject, input, output } from '@angular/core';
+import { SessionStore } from './state/session-store';
 
 @Component({
   selector: 'app-sessions-button',
@@ -8,4 +9,13 @@ import { Component, input } from '@angular/core';
 })
 export class SessionsButton {
   userId = input.required<string>();
+  activeSessionId = output<string>();
+
+  storeService = inject(SessionStore);
+
+  constructor() {
+    effect(() => {
+      this.activeSessionId.emit(this.storeService.activeSessionId());
+    });
+  }
 }

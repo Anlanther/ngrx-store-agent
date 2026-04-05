@@ -3,9 +3,11 @@
     <app-sessions-button [userId]="widgetInput().userId"></app-sessions-button>
   </div>
   <div class="body">
-    <app-body [conversations]="assistantStore.conversations()"></app-body>
+    <app-body-wrapper [conversations]="assistantStore.conversations()"></app-body-wrapper>
   </div>
   <div class="toolbars">
     <app-toolbar-wrapper [toolbar]="assistantStore.mode()"></app-toolbar-wrapper>
   </div>
+
+  <button matButton (click)="assistantStore.postResponse('Testing')">Send</button>
 </div>
