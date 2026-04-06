@@ -1,8 +1,8 @@
-import { Conversation } from './conversation-model';
+import { Message } from './message-model';
 
 export interface Session {
   id: string;
   title: string;
-  conversations: Conversation[];
+  conversations: Message[];
   createdAt: string;
 }

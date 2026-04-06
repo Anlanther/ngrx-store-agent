@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AgentResponseModel } from '../models';
+import { AgentResponse } from '../models';
 
 @Injectable({
   providedIn: 'root',
@@ -24,8 +24,8 @@ export class StreamingDataService {
     url: string,
     endpoint: string,
     body: { [key: string]: any },
-  ): Observable<AgentResponseModel> {
-    return new Observable<AgentResponseModel>((observer) => {
+  ): Observable<AgentResponse> {
+    return new Observable<AgentResponse>((observer) => {
       const ac = new AbortController();
 
       (async () => {

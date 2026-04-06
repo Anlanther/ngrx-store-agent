@@ -1,23 +1,18 @@
-export type AgentResponseModel = TextResponse | ChunksResponse | LogResponse | ThinkResponse;
+import { ResponseType } from '../constants';
 
-enum Type {
-  Text = 'text',
-  Log = 'log',
-  Chunks = 'chunks',
-  Think = 'think',
-}
+export type AgentResponse = TextResponse | ChunksResponse | LogResponse | ThinkResponse;
 
 interface BaseResponse {
-  type: Type;
+  type: ResponseType;
 }
 
 interface TextResponse extends BaseResponse {
-  type: Type.Text;
+  type: ResponseType.Text;
   text: string;
 }
 
 interface ChunksResponse extends BaseResponse {
-  type: Type.Chunks;
+  type: ResponseType.Chunks;
   chunks: {
     document_id: string;
     chunk_id: string;
@@ -27,11 +22,11 @@ interface ChunksResponse extends BaseResponse {
 }
 
 interface LogResponse extends BaseResponse {
-  type: Type.Log;
+  type: ResponseType.Log;
   log: string;
 }
 
 interface ThinkResponse extends BaseResponse {
-  type: Type.Think;
+  type: ResponseType.Think;
   text: string;
 }

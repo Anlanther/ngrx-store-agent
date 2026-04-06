@@ -1,5 +1,5 @@
 export enum Mode {
-  SuperSearch = 'super-search',
-  NewCurve = 'new-curve',
+  SuperSearch = 'superSearch',
+  NewCurve = 'newCurve',
   Core = 'core',
 }

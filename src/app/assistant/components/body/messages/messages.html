@@ -1,1 +1,6 @@
-<p>messages works!</p>
+<markdown class="regular" [data]="textHtml"></markdown>
+@for (message of messages(); track $index) {
+  @if (isTextMessage(message)) {
+    <markdown class="regular" [data]="message.text"></markdown>
+  }
+}

@@ -2,8 +2,7 @@
   @if (conversations().length === 0) {
     <div class="empty-state">No messages yet. Start a conversation.</div>
   } @else {
-    @for (conversation of conversations(); track trackByConversationId($index, conversation)) {
-      {{ conversation | json }}
-    }
+    <app-thinking [message]="thinkingMessage()"></app-thinking>
+    <app-messages [messages]="groupedDisplayMessages()"></app-messages>
   }
 </div>

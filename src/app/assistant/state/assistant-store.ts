@@ -1,16 +1,18 @@
 import { inject } from '@angular/core';
+import { tapResponse } from '@ngrx/operators';
 import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { pipe, switchMap } from 'rxjs';
+import { pipe, switchMap, tap } from 'rxjs';
 import { WORKSPACE_MODE_MAP } from '../../constants';
 import { Mode } from '../../constants/mode-enum';
+import { BaseAgentService, Message } from '../../models';
 
 type AssistantState = {
   mode: Mode;
   disclaimerMessage: string;
   activeSessionId: string;
   queryParams: { [key: string]: any };
-  conversations: any[];
+  conversations: Message[];
   // conversations: Conversation[];
 };
 
@@ -24,14 +26,15 @@ const initialState: AssistantState = {
 
 export const AssistantStore = signalStore(
   withState(initialState),
-  withProps((store) => {
-    const service = WORKSPACE_MODE_MAP.get(store.mode())?.service;
-    if (!service) {
-      throw new Error(`No service found for mode ${store.mode()}`);
-    }
-    return { service: inject(service) };
+  withProps(() => {
+    const servicesObj: { [key: string]: BaseAgentService } = {};
+    WORKSPACE_MODE_MAP.forEach((value) => {
+      servicesObj[value.mode] = inject(value.service);
+    });
+
+    return { ...servicesObj };
   }),
-  withMethods(({ service, ...store }) => ({
+  withMethods((store) => ({
     updateMode(mode: Mode): void {
       patchState(store, (state) => ({ ...state, mode }));
     },
@@ -41,25 +44,28 @@ export const AssistantStore = signalStore(
 
     postResponse: rxMethod<string>(
       pipe(
-        switchMap((message) => {
+        tap(() => {
           if (!store.activeSessionId()) {
             const newSessionId = crypto.randomUUID();
             patchState(store, (state) => ({ ...state, activeSessionId: newSessionId }));
           }
-
-          return service
+        }),
+        switchMap((message) => {
+          return store[store.mode()]
             .postResponse({
               queryParams: store.queryParams(),
               sessionId: store.activeSessionId(),
               message,
             })
             .pipe(
-              switchMap((response) => {
-                patchState(store, (state) => ({
-                  ...state,
-                  conversations: [...state.conversations, response],
-                }));
-                return [response];
+              tapResponse({
+                next: (response) => {
+                  patchState(store, (state) => ({
+                    ...state,
+                    conversations: [...state.conversations, response],
+                  }));
+                },
+                error: (error) => {},
               }),
             );
         }),
