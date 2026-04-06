@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MarkdownModule } from 'ngx-markdown';
+import { DynamicHooksComponent } from 'ngx-dynamic-hooks';
 import { SafeHtmlPipe } from '../../../pipes/safe-html.pipe';
+import { MessageFormatterService } from '../../../services';
 import { BodyWrapper } from './body-wrapper/body-wrapper';
-import { MdRenderer } from './md-renderer/md-renderer';
 import { Messages } from './messages/messages';
 import { Thinking } from './thinking/thinking';
 
 @NgModule({
-  declarations: [BodyWrapper, Messages, MdRenderer, Thinking],
-  imports: [CommonModule, SafeHtmlPipe, MarkdownModule.forRoot()],
+  declarations: [BodyWrapper, Messages, Thinking],
+  imports: [CommonModule, SafeHtmlPipe, DynamicHooksComponent],
   exports: [BodyWrapper],
-  providers: [SafeHtmlPipe],
+  providers: [SafeHtmlPipe, MessageFormatterService],
 })
 export class BodyModule {}

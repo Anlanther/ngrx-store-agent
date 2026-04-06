@@ -1,6 +1,6 @@
 @switch (toolbar()) {
   @case (superSearch) {
-    <app-super-search-toolbar></app-super-search-toolbar>
+    <app-super-search-toolbar (qpUpdated)="qpUpdatedHandler($event)"></app-super-search-toolbar>
   }
   @case (core) {
     <app-core-toolbar></app-core-toolbar>

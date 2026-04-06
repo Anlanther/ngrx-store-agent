@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Mode } from '../../../../constants/mode-enum';
 
 @Component({
@@ -9,6 +9,7 @@ import { Mode } from '../../../../constants/mode-enum';
 })
 export class ToolbarWrapper {
   toolbar = input.required<Mode>();
+  qpUpdated = output();
 
   get superSearch() {
     return Mode.SuperSearch;
@@ -16,5 +17,9 @@ export class ToolbarWrapper {
 
   get core() {
     return Mode.Core;
+  }
+
+  qpUpdatedHandler(params: any) {
+    this.qpUpdated.emit(params);
   }
 }

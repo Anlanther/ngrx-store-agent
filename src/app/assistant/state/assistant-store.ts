@@ -13,7 +13,6 @@ type AssistantState = {
   activeSessionId: string;
   queryParams: { [key: string]: any };
   conversations: Message[];
-  // conversations: Conversation[];
 };
 
 const initialState: AssistantState = {
@@ -40,6 +39,12 @@ export const AssistantStore = signalStore(
     },
     setActiveSessionId(sessionId: string): void {
       patchState(store, (state) => ({ ...state, activeSessionId: sessionId }));
+    },
+    updateQueryParams(params: { [key: string]: any }): void {
+      patchState(store, (state) => ({
+        ...state,
+        queryParams: { ...state.queryParams, ...params },
+      }));
     },
 
     postResponse: rxMethod<string>(

@@ -21,4 +21,8 @@ export class Assistant {
       );
     });
   }
+
+  onQueryParamsUpdated(params: any) {
+    this.assistantStore.updateQueryParams(params);
+  }
 }

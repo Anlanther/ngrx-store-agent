@@ -1,6 +1,5 @@
-<markdown class="regular" [data]="textHtml"></markdown>
-@for (message of messages(); track $index) {
+@for (message of formattedMessages(); track $index) {
   @if (isTextMessage(message)) {
-    <markdown class="regular" [data]="message.text"></markdown>
+    <ngx-dynamic-hooks [content]="message.text" [parsers]="parsers"></ngx-dynamic-hooks>
   }
 }

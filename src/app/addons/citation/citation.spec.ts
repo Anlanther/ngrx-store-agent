@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MdRenderer } from './md-renderer';
+import { Citation } from './citation';
 
-describe('MdRenderer', () => {
-  let component: MdRenderer;
-  let fixture: ComponentFixture<MdRenderer>;
+describe('Citation', () => {
+  let component: Citation;
+  let fixture: ComponentFixture<Citation>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MdRenderer],
+      declarations: [Citation],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MdRenderer);
+    fixture = TestBed.createComponent(Citation);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

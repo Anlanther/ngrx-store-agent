@@ -5,7 +5,7 @@ import { AgentResponse, Message } from '../models';
 @Injectable({
   providedIn: 'root',
 })
-export class MessageConverterService {
+export class DataConverterService {
   convertToMessage(response: AgentResponse): Message {
     switch (response.type) {
       case ResponseType.Text:

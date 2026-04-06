@@ -6,7 +6,10 @@
     <app-body-wrapper [conversations]="assistantStore.conversations()"></app-body-wrapper>
   </div>
   <div class="toolbars">
-    <app-toolbar-wrapper [toolbar]="assistantStore.mode()"></app-toolbar-wrapper>
+    <app-toolbar-wrapper
+      [toolbar]="assistantStore.mode()"
+      (qpUpdated)="onQueryParamsUpdated($event)"
+    ></app-toolbar-wrapper>
   </div>
 
   <button matButton (click)="assistantStore.postResponse('Testing')">Send</button>

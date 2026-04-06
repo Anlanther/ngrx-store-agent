@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { CoreToolbar } from './core-toolbar/core-toolbar';
+import { CoreToolbarModule } from './core-toolbar/core-toolbar-module';
 import { SuperSearchToolbarStore } from './super-search-toolbar/state/super-search-toolbar-store';
-import { SuperSearchToolbar } from './super-search-toolbar/super-search-toolbar';
+import { SuperSearchToolbarModule } from './super-search-toolbar/super-search-toolbar-module';
 import { ToolbarWrapper } from './toolbar-wrapper/toolbar-wrapper';
 
 @NgModule({
-  declarations: [SuperSearchToolbar, CoreToolbar, ToolbarWrapper],
-  imports: [CommonModule],
-  exports: [SuperSearchToolbar, CoreToolbar, ToolbarWrapper],
+  declarations: [ToolbarWrapper],
+  imports: [CommonModule, SuperSearchToolbarModule, CoreToolbarModule],
+  exports: [ToolbarWrapper],
   providers: [SuperSearchToolbarStore],
 })
 export class ToolbarModule {}

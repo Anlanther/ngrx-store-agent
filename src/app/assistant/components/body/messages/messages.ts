@@ -1,7 +1,8 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
+import { Citation } from '../../../../addons/citation/citation';
 import { ResponseType } from '../../../../constants';
 import { Message, TextMessage } from '../../../../models';
-import { SafeHtmlPipe } from '../../../../pipes/safe-html.pipe';
+import { MessageFormatterService } from '../../../../services';
 
 @Component({
   selector: 'app-messages',
@@ -12,9 +13,17 @@ import { SafeHtmlPipe } from '../../../../pipes/safe-html.pipe';
 export class Messages {
   messages = input.required<Message[]>();
 
-  safeHtmlPipe = inject(SafeHtmlPipe);
+  messageFormatterService = inject(MessageFormatterService);
 
-  textHtml = `<app-sessions-button></app-sessions-button>`;
+  formattedMessages = computed(() => {
+    return this.messages().map((message) =>
+      message.type === ResponseType.Text
+        ? { ...message, text: this.messageFormatterService.formatMdToHtml(message.text) }
+        : message,
+    );
+  });
+
+  parsers = [Citation];
 
   isTextMessage(message: Message): message is TextMessage {
     return message.type === ResponseType.Text;

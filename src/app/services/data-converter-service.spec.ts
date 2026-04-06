@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MessageConverterService } from './message-converter-service';
+import { DataConverterService } from './data-converter-service';
 
 describe('MessageConverterService', () => {
-  let service: MessageConverterService;
+  let service: DataConverterService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(MessageConverterService);
+    service = TestBed.inject(DataConverterService);
   });
 
   it('should be created', () => {
