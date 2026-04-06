@@ -3,8 +3,7 @@ import { tapResponse } from '@ngrx/operators';
 import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
-import { WORKSPACE_MODE_MAP } from '../../constants';
-import { Mode } from '../../constants/mode-enum';
+import { Mode, WORKSPACE_MODE_MAP } from '../../constants';
 import { BaseAgentService, Message } from '../../models';
 
 type AssistantState = {
@@ -13,6 +12,7 @@ type AssistantState = {
   activeSessionId: string;
   queryParams: { [key: string]: any };
   conversations: Message[];
+  isLoading: boolean;
 };
 
 const initialState: AssistantState = {
@@ -21,6 +21,7 @@ const initialState: AssistantState = {
   queryParams: {},
   disclaimerMessage: 'This is a demo assistant. Please do not share sensitive information.',
   conversations: [],
+  isLoading: false,
 };
 
 export const AssistantStore = signalStore(
@@ -50,6 +51,7 @@ export const AssistantStore = signalStore(
     postResponse: rxMethod<string>(
       pipe(
         tap(() => {
+          patchState(store, (state) => ({ ...state, isLoading: true }));
           if (!store.activeSessionId()) {
             const newSessionId = crypto.randomUUID();
             patchState(store, (state) => ({ ...state, activeSessionId: newSessionId }));
@@ -71,6 +73,7 @@ export const AssistantStore = signalStore(
                   }));
                 },
                 error: (error) => {},
+                finalize: () => patchState(store, (state) => ({ ...state, isLoading: false })),
               }),
             );
         }),
