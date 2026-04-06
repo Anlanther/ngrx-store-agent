@@ -1,59 +1,19 @@
 # NgrxStoreAgent
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.5.
+This project was created to experiment with rendering streaming response. The simplest way to run this project is with [fastapi-playground](https://github.com/Anlanther/fastapi-playground).
 
-## Development server
+## Composability
 
-To start a local development server, run:
+Depending on the widget input provided by the app component to the assistant, its **data services** and **toolbars** will be switched accordingly.
 
-```bash
-ng serve
-```
+### Data Services
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Depending on mode, which is mapped to a workspace ID provided by the widget input, the appropriate data service `postResponse()` method will be called when triggered. This is done via the `workspace-mode-map`. To add more data services, the map needs to be updated and the data service should inherit the `BaseAgentService` interface.
 
-## Code scaffolding
+### Toolbars
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Depending on mode, which is mapped to a workspace ID provided by the widget input, the toolbar component will be switched automatically. Each component within a toolbar will construct their own query parameters, which will be passed to the assistant component to package automatically to send to the mapped service.
 
-```bash
-ng generate component component-name
-```
+### State Services
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Each significant grouping of components has its own NgRx Signal Store. This is to help with grouped loading and data transformations, which are then shared within its group of components. This is also to abstract specific logic into its own dedicated layer, such as seen in for the toolbars.
