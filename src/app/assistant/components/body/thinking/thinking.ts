@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { BodyStore } from '../state/body-store';
+import { BodyStore } from '../body-store';
 
 @Component({
   selector: 'app-thinking',

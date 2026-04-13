@@ -1,5 +1,5 @@
 import { Component, effect, inject, output } from '@angular/core';
-import { SuperSearchToolbarStore } from './state/super-search-toolbar-store';
+import { SuperSearchToolbarStore } from './super-search-toolbar-store';
 
 interface SuperSearchToolbarQueryParams {
   isDeepSearchEnabled: boolean;

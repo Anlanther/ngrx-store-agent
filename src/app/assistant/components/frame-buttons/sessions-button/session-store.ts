@@ -3,8 +3,8 @@ import { tapResponse } from '@ngrx/operators';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap } from 'rxjs';
-import { Session } from '../../../../../models';
-import { CmsDataService } from '../../../../../services';
+import { Session } from '../../../../models';
+import { CmsDataService } from '../../../../services';
 
 type SessionState = {
   activeSessionId: string;

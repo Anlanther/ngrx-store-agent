@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CoreToolbarModule } from './core-toolbar/core-toolbar-module';
-import { SuperSearchToolbarStore } from './super-search-toolbar/state/super-search-toolbar-store';
 import { SuperSearchToolbarModule } from './super-search-toolbar/super-search-toolbar-module';
+import { SuperSearchToolbarStore } from './super-search-toolbar/super-search-toolbar-store';
 import { ToolbarWrapper } from './toolbar-wrapper/toolbar-wrapper';
 
 @NgModule({

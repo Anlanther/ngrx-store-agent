@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Citation } from '../../../../addons/citation/citation';
 import { ResponseType } from '../../../../constants';
 import { Message, TextMessage } from '../../../../models';
-import { BodyStore } from '../state/body-store';
+import { BodyStore } from '../body-store';
 
 @Component({
   selector: 'app-messages',

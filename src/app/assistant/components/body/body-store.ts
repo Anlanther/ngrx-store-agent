@@ -7,9 +7,9 @@ import {
   withProps,
   withState,
 } from '@ngrx/signals';
-import { ResponseType } from '../../../../constants';
-import { Message } from '../../../../models';
-import { MessageFormatterService } from '../../../../services';
+import { ResponseType } from '../../../constants';
+import { Message } from '../../../models';
+import { MessageFormatterService } from '../../../services';
 
 type BodyState = {
   rawConversations: Message[];
@@ -31,7 +31,7 @@ export const BodyStore = signalStore(
         .rawConversations()
         .filter((message) => message.type === ResponseType.Think)
         .map((message) => message.text)
-        .join();
+        .join(' ');
     }),
     displayConversations: computed(() => {
       const typesForDisplay = [ResponseType.Text, ResponseType.Chunks];

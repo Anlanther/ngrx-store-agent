@@ -1,6 +1,6 @@
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
-import { Mode } from '../../../../../constants/mode-enum';
-import { ToolbarBaseModel } from '../../../../../models/toolbar-base-model';
+import { Mode } from '../../../../constants';
+import { ToolbarBaseModel } from '../../../../models';
 
 export interface SuperSearchToolbarState extends ToolbarBaseModel {
   mode: Mode.SuperSearch;

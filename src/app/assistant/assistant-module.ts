@@ -2,10 +2,10 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Assistant } from './assistant';
+import { AssistantStore } from './assistant-store';
 import { BodyModule } from './components/body/body-module';
 import { FrameButtonsModule } from './components/frame-buttons/buttons-module';
 import { ToolbarModule } from './components/toolbars/toolbar-module';
-import { AssistantStore } from './state/assistant-store';
 
 @NgModule({
   declarations: [Assistant],

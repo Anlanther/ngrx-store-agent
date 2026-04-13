@@ -3,8 +3,8 @@ import { tapResponse } from '@ngrx/operators';
 import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
-import { Mode, WORKSPACE_MODE_MAP } from '../../constants';
-import { BaseAgentService, Message } from '../../models';
+import { Mode, WORKSPACE_MODE_MAP } from '../constants';
+import { BaseAgentService, Message } from '../models';
 
 type AssistantState = {
   mode: Mode;

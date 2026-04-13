@@ -1,5 +1,5 @@
 import { Component, effect, inject, input, output } from '@angular/core';
-import { SessionStore } from './state/session-store';
+import { SessionStore } from './session-store';
 
 @Component({
   selector: 'app-sessions-button',

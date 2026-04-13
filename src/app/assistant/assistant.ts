@@ -1,7 +1,7 @@
 import { Component, effect, inject, input } from '@angular/core';
 import { Mode, WORKSPACE_MODE_MAP } from '../constants';
 import { WidgetInput } from '../models';
-import { AssistantStore } from './state/assistant-store';
+import { AssistantStore } from './assistant-store';
 
 @Component({
   selector: 'app-assistant',

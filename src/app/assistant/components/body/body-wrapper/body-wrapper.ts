@@ -1,6 +1,6 @@
 import { Component, effect, inject, input } from '@angular/core';
 import { Message } from '../../../../models';
-import { BodyStore } from '../state/body-store';
+import { BodyStore } from '../body-store';
 
 @Component({
   selector: 'app-body-wrapper',

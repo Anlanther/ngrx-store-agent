@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { SessionStore } from './sessions-button/session-store';
 import { SessionsButton } from './sessions-button/sessions-button';
-import { SessionStore } from './sessions-button/state/session-store';
 
 @NgModule({
   declarations: [SessionsButton],
