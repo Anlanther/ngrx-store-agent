@@ -1,4 +1,4 @@
-@for (message of formattedMessages(); track $index) {
+@for (message of bodyStore.displayConversations(); track $index) {
   @if (isTextMessage(message)) {
     <ngx-dynamic-hooks [content]="message.text" [parsers]="parsers"></ngx-dynamic-hooks>
   }

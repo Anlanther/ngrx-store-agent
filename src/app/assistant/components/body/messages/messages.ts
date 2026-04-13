@@ -1,8 +1,8 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Citation } from '../../../../addons/citation/citation';
 import { ResponseType } from '../../../../constants';
 import { Message, TextMessage } from '../../../../models';
-import { MessageFormatterService } from '../../../../services';
+import { BodyStore } from '../state/body-store';
 
 @Component({
   selector: 'app-messages',
@@ -11,17 +11,7 @@ import { MessageFormatterService } from '../../../../services';
   styleUrl: './messages.scss',
 })
 export class Messages {
-  messages = input.required<Message[]>();
-
-  messageFormatterService = inject(MessageFormatterService);
-
-  formattedMessages = computed(() => {
-    return this.messages().map((message) =>
-      message.type === ResponseType.Text
-        ? { ...message, text: this.messageFormatterService.formatMdToHtml(message.text) }
-        : message,
-    );
-  });
+  bodyStore = inject(BodyStore);
 
   parsers = [Citation];
 

@@ -1,4 +1,5 @@
-import { Component, input } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { BodyStore } from '../state/body-store';
 
 @Component({
   selector: 'app-thinking',
@@ -7,5 +8,5 @@ import { Component, input } from '@angular/core';
   styleUrl: './thinking.scss',
 })
 export class Thinking {
-  message = input.required<string>();
+  bodyStore = inject(BodyStore);
 }

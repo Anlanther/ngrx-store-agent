@@ -2,7 +2,7 @@
   @if (conversations().length === 0) {
     <div class="empty-state">No messages yet. Start a conversation.</div>
   } @else {
-    <app-thinking [message]="thinkingMessage()"></app-thinking>
-    <app-messages [messages]="groupedDisplayMessages()"></app-messages>
+    <app-thinking></app-thinking>
+    <app-messages></app-messages>
   }
 </div>
