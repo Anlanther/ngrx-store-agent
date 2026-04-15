@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AgentResponse } from '../models';
+import { from, map, mergeMap, Observable, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StreamingDataService {
-  private reader = new TextDecoder();
+  private decoder = new TextDecoder();
 
-  private async fetch(url: string, endpoint: string, body: { [key: string]: any }) {
+  private async fetch(url: string, endpoint: string, body: { [key: string]: any }, format: string) {
+    const headerOptions: HeadersInit =
+      format === 'json' ? { 'Content-type': 'application/json' } : {};
+
     const response = await fetch(`${url}${endpoint}`, {
       method: 'POST',
-      headers: {},
+      headers: { ...headerOptions },
       body: JSON.stringify(body),
     });
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -20,30 +22,17 @@ export class StreamingDataService {
     return response;
   }
 
-  getStream(
+  getStream<T>(
     url: string,
     endpoint: string,
     body: { [key: string]: any },
-  ): Observable<AgentResponse> {
-    return new Observable<AgentResponse>((observer) => {
-      const ac = new AbortController();
-
-      (async () => {
-        const response = await this.fetch(url, endpoint, body);
-        const reader = response.body!.getReader();
-
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) {
-            observer.complete();
-            break;
-          }
-          const chunk = this.reader.decode(value, { stream: true });
-          observer.next(JSON.parse(chunk));
-        }
-      })();
-
-      return () => ac.abort();
-    });
+    format = 'json',
+  ): Observable<T> {
+    return from(this.fetch(url, endpoint, body, format)).pipe(
+      switchMap((response) => from(response.body as unknown as AsyncIterable<Uint8Array>)),
+      map((chunk) => this.decoder.decode(chunk, { stream: true })),
+      mergeMap((chunk) => chunk.split('\n').filter((c) => !!c)),
+      map((c) => JSON.parse(c) as T),
+    );
   }
 }
